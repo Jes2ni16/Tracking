@@ -1,0 +1,164 @@
+.wrapper {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 50px;
+position: relative;
+}
+
+.profileInfo {
+    border: 1px solid #33303096;
+    width: 40%;
+    height: auto;
+    font-size: 15px;
+}
+
+.profileName h2{
+    text-align: center;
+
+}
+
+.profileName {
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a7b41;
+    color: #fff;
+}
+
+.profileDetails ul li{
+    display: flex;
+    border-top:1px solid #33303096;
+    padding: 5px 20px;
+}
+.profileDetails ul{
+   margin-top: 40px;
+}
+.profileDetails ul li p{
+    flex: 1;
+}
+
+.documentArea {
+    margin-left: 30px;
+    width: 60%;
+    border: 1px solid #33303096;
+}
+
+.docReq {
+    width: 95%;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.docReq table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.docReq td{
+    border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.docReq th{
+    border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.requestedStatus {
+    margin-top: 50px;
+}
+
+.requestedStatus h3{
+    text-align: center;
+}
+
+.requestedDoc {
+    width: 95%;
+    margin: 10px auto;
+
+}
+
+.requestButton {
+    padding: 20px 10px;
+    font-size: 20px;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    margin-top: 30px;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    color: #fffbfb;
+    background-color: #e45812;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.requestButton:hover {
+    
+    background-color: #bd4211;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.requestedDoc table {
+    width: 100%;
+  border-collapse: collapse;
+}
+
+.requestedDoc th {
+    border: 1px solid #dddddd;
+ padding: 8px; 
+    text-align: left;
+}
+
+.requestedDoc td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.logout {
+    position: absolute;
+    right: -7rem;
+    text-decoration: underline;
+    display: flex;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+
+.wrapper {
+    display: block;
+}
+.profileName {
+    height: 10vh;
+}
+.profileInfo{
+    width: 95%;
+    margin: auto;
+}
+.documentArea {
+    width: 100%;
+    margin-left: 0;
+    border: none;
+}
+.docReq {
+    font-size: 10px;
+}
+.requestedStatus {
+    font-size: 11px;
+}
+    .logout {
+        right: 1rem;
+        top: -2rem;
+    }
+    .profileDetails ul {
+        margin-top: 5px;
+    }
+}

@@ -1,0 +1,95 @@
+.main{
+    margin: auto;
+    width: 90%;
+    max-width: 1400px;
+    margin-top: 100px;
+}
+
+.main h1{
+    text-align: center;
+}
+
+.details {
+    margin-top: 30px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);;
+    grid-template-rows: repeat(5, 1fr);
+    font-size: 20px;
+    border: 1px solid #000;
+}
+.details p {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+   padding: 15px 5px;
+    border: 1px solid #aaa;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.buttons button {
+ padding: 15px 25px;
+ border-radius: 5px;
+ margin-left: 10px;
+ font-size: 19px;
+ color: #fff;
+ cursor: pointer;
+}
+.button1 {
+    background-color: #1c9d50;
+    border: 1px solid #1c9d50;
+}
+
+.button2 {
+    background-color: #FF0000;
+    border: 1px solid #FF0000;
+}
+
+.details p strong {
+margin-bottom: 10px;
+font-size: 18px;
+}
+.grid1{
+
+}
+.grid2{
+    
+}
+.grid3{
+    
+}
+.grid4{
+    
+}
+.grid5{
+    
+}
+.grid6{
+    
+}
+.grid7{
+    
+}
+.grid8{
+    
+}
+.grid9{
+    
+}
+.grid10{
+    
+}
+.grid11{
+    
+}
+.grid12{
+    
+}
+.grid13{
+   grid-column: span 3;
+}

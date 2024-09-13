@@ -1,0 +1,143 @@
+.main {
+    height: 100vh;
+    overflow-y: scroll;
+}
+.box {
+    border: 1px solid #42404079;
+    max-width: 1000px;
+    height: auto;
+    margin-top: 800px;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    position: relative;
+    padding: 20px 0;
+    border-radius: 20px;
+  }
+
+
+  .userDetails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+    width: 100%;
+    margin: auto;
+    max-width: 500px;
+  }
+
+  .inputBox{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .inputBox label{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .inputBox input{
+    height: 35px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+  .inputBox textarea{
+    height: 70px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+  .inputBox select{
+    height: 35px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+
+.requestBtn {
+    padding: 20px;
+    margin: auto;
+    width: 300px;
+    margin-top: 30px;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #1c9d50;
+    border: none;
+    color:white;
+    cursor: pointer;
+}
+
+.requestBtn:hover {
+
+  background-color: #1a7b41;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.logo{
+    width: 80px;
+    position: absolute;
+    left: 30px;
+    top: 0;
+  }
+
+  .box h1{
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#1c9d50 ;
+height: 100vh;
+    font-size: 60px;
+  }
+
+  .requestButton {
+    padding: 10px;
+    font-size: 20px;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    margin-top: 30px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .reqFiles label {
+ display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .reqFiles div{
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  padding: 10px;   
+  }
+  .reqFiles input{
+  margin-bottom: 8px;
+  font-size: 16px;
+  }

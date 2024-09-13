@@ -1,0 +1,103 @@
+.navigation {
+    background-color: #ddfbe8;
+width: 20%;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+}
+
+.profilePic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ccc; /* Gray background for the placeholder */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .profileName {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .navPanel {
+    text-align: start;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  .navPanel p{
+   padding: 10px 20px;
+   cursor: pointer;
+  }
+
+  .heading {
+    display: flex;
+    align-items: baseline;
+    background-color: #F5F5F5;
+    padding: 10px;
+  }
+  .heading h1 {
+    margin-right: 20px;
+
+  }
+  .dataInformation {
+    width: 80%;
+    border: 15px solid #F5F5F5 ;
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
+
+  .dataResult tbody td {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .dataResult {
+    padding: 10px;
+  }
+
+  .dataResult table {
+    padding: 10px;
+    width: 100%;
+  }
+  .dataResult tbody td a{
+    text-decoration: underline;
+  }
+  .dataResult td button {
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: none;
+  }
+  .acceptBtn {
+    background-color: #1c9d50;
+    color: #fff;
+  }
+
+  .deleteBtn {
+    background-color: #e63946;
+    color: #fff;
+  }
+
+  .selected {
+    background-color: #208548;
+    color: #fff;
+  }
+
