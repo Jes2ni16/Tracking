@@ -186,7 +186,11 @@ const DocumentDetails = () => {
       <p className={styles.grid12}><strong>Updated Date:</strong>  {new Date(document.updatedAt).toLocaleDateString()}</p>
       <p className={styles.grid13}><strong>Requirements:</strong> </p>
       <ul>
-<img src="" alt="" />
+        {transformedFiles?.map((file)=>(
+          <img src={`https://tracking-server-9kmt.onrender.com${file.filePath}`} alt="" />
+        ))
+        }
+
     </ul>
       </div>
       <div className={styles.buttons}>
