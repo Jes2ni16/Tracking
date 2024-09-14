@@ -186,15 +186,7 @@ const DocumentDetails = () => {
       <p className={styles.grid12}><strong>Updated Date:</strong>  {new Date(document.updatedAt).toLocaleDateString()}</p>
       <p className={styles.grid13}><strong>Requirements:</strong> </p>
       <ul>
-      {transformedFiles?.map((file, index) => (
-        <li key={index}>
-          <img
-            src={`https://tracking-server-9kmt.onrender.com/uploads/${file.filePath}`}
-            alt={file.originalName}
-            style={{ width: '200px', height: 'auto' }} // Adjust size as needed
-          />
-        </li>
-      ))}
+<img src="" alt="" />
     </ul>
       </div>
       <div className={styles.buttons}>
