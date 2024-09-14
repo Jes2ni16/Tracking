@@ -60,7 +60,7 @@ const RegisterForm: React.FC = () => {
 
 
     try {
-      const res = await fetch('http://localhost:8000/api/documents', {
+      const res = await fetch('https://tracking-server-9kmt.onrender.com/api/documents', {
         method: 'POST',
         headers: {
 
@@ -76,7 +76,6 @@ const RegisterForm: React.FC = () => {
       }
 
       const data = await res.json();
-      console.log('Registration successful', data);
 
       // Clear form
       setFilename('');
@@ -103,7 +102,6 @@ const RegisterForm: React.FC = () => {
       }, 2000);
 
     } catch (err) {
-      console.error('An error occurred:', err);
       setError('An error occurred during registration.');
     } finally {
       setLoading(false);

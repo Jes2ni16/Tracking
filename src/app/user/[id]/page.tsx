@@ -22,8 +22,7 @@ export default function UserProfile () {
         const token = localStorage.getItem('accessToken');
         const userId = localStorage.getItem('userId');
 
-        console.log(token)
-        console.log(userId)
+
 
         useEffect(() => {
             const fetchUserData = async () => {
@@ -35,8 +34,7 @@ export default function UserProfile () {
                 setLoading(true);
             
                 try {
-                    console.log('Fetching user data...');
-                    const response = await fetch(`http://localhost:8000/api/users/${userId}`, {
+                    const response = await fetch(`https://tracking-server-9kmt.onrender.com/api/users/${userId}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -72,15 +70,13 @@ export default function UserProfile () {
     
         useEffect(() => {
             if (!token) {
-                console.error('Token is not available');
                 return;
             }
         
             const fetchDocumentData = async () => {
-                console.log('Token:', token);  
         
                 try {
-                    const response1 = await fetch(`http://localhost:8000/api/documents/`, {
+                    const response1 = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -93,8 +89,13 @@ export default function UserProfile () {
                     }
         
                     const data = await response1.json();
-                    setDocumentData(data);
-                    console.log(documentData)
+                    const sortedData = data.sort((a:any, b:any) => {
+                        const dateA = new Date(a.createdAt).getTime();
+                        const dateB = new Date(b.createdAt).getTime();
+                        return dateB - dateA; // Newest first
+                      });
+                    setDocumentData(sortedData);
+
                 } catch (err: unknown) {
                     if (err instanceof Error) {
                         setErrorDocument(err.message);
@@ -118,7 +119,6 @@ export default function UserProfile () {
             const birthDate = new Date(userData.birth_date);
     
             if (isNaN(birthDate.getTime())) {
-                console.error('Invalid Date:', userData.birth_date);
                 setFormattedBirthDate('Invalid Date');
             } else {
                 const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -130,7 +130,6 @@ export default function UserProfile () {
         const createdAt = new Date(userData.birth_date);
 
         if (isNaN(createdAt.getTime())) {
-            console.error('Invalid Date:', userData.birth_date);
             setFormattedCreatedAt('Invalid Date');
         } else {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };

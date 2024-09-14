@@ -16,7 +16,7 @@ export default function Login() {
       e.preventDefault(); 
   
    
-        const res = await fetch('http://localhost:8000/api/users/login', {
+        const res = await fetch('https://tracking-server-9kmt.onrender.com/api/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -28,10 +28,7 @@ export default function Login() {
             const data = await res.json();
             localStorage.setItem('accessToken', data.accessToken);
             localStorage.setItem('userId', data.user.id);
-          console.log(data.user.role)
-          console.log(data.accessToken)
-          console.log(data.user.role)
-        
+
            
           //  const userId = data.user.id; 
           if (data.user.role === 'admin') {

@@ -18,7 +18,7 @@ const RegisterForm: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch(`http://localhost:8000/api/view/${id}`);
+            const response = await fetch(`https://tracking-server-9kmt.onrender.com/api/view/${id}`);
             if (response.ok) {
               const data = await response.json();
               setDocument(data);

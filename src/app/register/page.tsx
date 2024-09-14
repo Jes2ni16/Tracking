@@ -48,8 +48,7 @@ const RegisterForm: React.FC = () => {
     setError(null);
 
  try {
-  console.log('Starting fetch request');
-  const res = await fetch('http://localhost:8000/api/users/register', {
+  const res = await fetch('https://tracking-server-9kmt.onrender.com/api/users/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -72,7 +71,6 @@ const RegisterForm: React.FC = () => {
     }),
   });
 
-  console.log('Fetch response:', res);
 
   if (!res.ok) {
     const errorData = await res.json();

@@ -58,7 +58,7 @@ const DocumentDetails = () => {
 
     const fetchDocument = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/documents/${id}`, {
+        const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const DocumentDetails = () => {
 
     try {
       // Update document status
-      const res = await fetch(`http://localhost:8000/api/documents/${documentId}`, {
+      const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${documentId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

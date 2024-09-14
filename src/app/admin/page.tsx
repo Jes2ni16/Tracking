@@ -34,6 +34,7 @@ const AdminPage: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [token, setToken] = useState<string | null>(null);
     const [selectedFilter, setSelectedFilter] = useState<string | null>(' ');
+    const [lastFetched, setLastFetched] = useState<number>(Date.now());
 
     
     useEffect(() => {
@@ -50,7 +51,7 @@ const AdminPage: React.FC = () => {
         const fetchDocuments = async () => {
             try {
                 
-        const res = await fetch('http://localhost:8000/api/documents', {
+        const res = await fetch('https://tracking-server-9kmt.onrender.com/api/documents', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -78,16 +79,19 @@ const AdminPage: React.FC = () => {
         };
 
         fetchDocuments();
-    }, [token]);
+        const intervalId = setInterval(fetchDocuments, 30000); // Poll every 30 seconds
 
+        return () => clearInterval(intervalId);
+    }, [token,lastFetched]);
 
+console.log(documents)
 
 
     useEffect(() => {
         if(!token) return;
         const fetchUsers = async () => {
             try {
-                const res = await fetch('http://localhost:8000/api/users', {
+                const res = await fetch('https://tracking-server-9kmt.onrender.com/api/users', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -160,13 +164,9 @@ const formattedDate = format(date, 'MMMM dd, yyyy '); // Adjust format as needed
 return formattedDate;
 }
 
-    console.log(users)
-    console.log(documents)
     // Display loading and error messages
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
-
-console.log(filteredDocuments)
 
 const handleStatusChange = async (documentId: string, currentStatus: string) => {
     const isConfirmed = window.confirm('Are you sure you want to update the document status?');
@@ -189,7 +189,8 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
         newStatus = 'releasing';
         break;
       case 'releasing':
-        newStatus = 'released'
+        newStatus = 'released';
+        break;
       default:
         setLoading(false);
         setError('Invalid current status');
@@ -197,7 +198,7 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
     }
   
     try {
-      const res = await fetch(`http://localhost:8000/api/documents/${documentId}`, {
+      const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${documentId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -216,6 +217,7 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
           doc._id === documentId ? { ...doc, status: newStatus } : doc
         )
       );
+      setLastFetched(Date.now());
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -226,6 +228,42 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
       setLoading(false);
     }
   };
+
+const handleDelete = async (documentId: string) =>{
+    const isConfirmed = window.confirm('Are you sure you want to update the document status?');
+    if (!isConfirmed) return;
+    try {
+        const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${documentId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status: 'archived' }),
+        });
+    
+        if (!res.ok) {
+          throw new Error('Failed to update status');
+        }
+    
+        // Update the local state to reflect the new status
+        setDocuments(prevDocuments =>
+          prevDocuments.map(doc =>
+            doc._id === documentId ? { ...doc, status: 'archived'} : doc
+          )
+        );
+        setLastFetched(Date.now());
+    } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+      } finally {
+        setLoading(false);
+      }
+}
+
     return (
         <main className={styles.wrapper}>
             <div className={styles.navigation}>
@@ -253,6 +291,9 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
                     <p
                      className={selectedFilter === 'released' ? styles.selected : ''}
                     onClick={()=>getFilteredDocuments('released','released')}>Released</p>
+                       <p
+                     className={selectedFilter === 'archived' ? styles.selected : ''}
+                    onClick={()=>getFilteredDocuments('archived','archived')}>Archived</p>
 
                     <p onClick={logout}>Logout</p>
                 </div>
@@ -294,7 +335,7 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
                                     ? 'Processing...'
                                     : getButtonText(data.status)}
                 </button>
-                <button className={styles.deleteBtn}>Delete</button>
+                <button className={styles.deleteBtn} onClick={()=>handleDelete(data._id)}>Delete</button>
             </td>
             <td>
                 <a href={`/admin/document/${data._id}`} target="_blank" rel="noopener noreferrer">
