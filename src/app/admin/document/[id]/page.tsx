@@ -154,7 +154,7 @@ const DocumentDetails = () => {
   };
 
   
-  console.log(document?._id)
+  console.log(document?.files)
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -182,10 +182,11 @@ const DocumentDetails = () => {
                 <li key={index} >
                   {document.files ? (
                     <img
-                      src={file.filePath}
+                      src={`https://tracking-server-9kmt.onrender.com/uploads/${file.filePath}`}
                       alt={file.originalName}
                       style={{ width: '200px', height: 'auto' }} // Adjust size as needed
                     />
+                
                   ) : (
                     <p><strong>File:</strong> {file.originalName}</p>
                   )}
