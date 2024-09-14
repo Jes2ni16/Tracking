@@ -81,8 +81,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #1c9d50;
     border: none;
-    color:white
-    
+    color:white;
+    cursor: pointer;
 }
 
 .logo{
