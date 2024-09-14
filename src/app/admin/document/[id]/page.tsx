@@ -182,7 +182,7 @@ const DocumentDetails = () => {
                 <li key={index} >
                   {document.files ? (
                     <img
-                      src={`https://tracking-server-9kmt.onrender.com/uploads/${file.filePath}`}
+                      src={`https://tracking-server-9kmt.onrender.com/uploads/${file.originalName}`}
                       alt={file.originalName}
                       style={{ width: '200px', height: 'auto' }} // Adjust size as needed
                     />
