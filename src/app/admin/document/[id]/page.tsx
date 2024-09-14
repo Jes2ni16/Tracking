@@ -178,8 +178,8 @@ const DocumentDetails = () => {
       <p className={styles.grid12}><strong>Updated Date:</strong>  {new Date(document.updatedAt).toLocaleDateString()}</p>
       <p className={styles.grid13}><strong>Requirements:</strong> </p>
       <ul>
-              {document.files.map((file) => (
-                <li >
+              {document.files.map((file,index) => (
+                <li key={index} >
                   {document.files ? (
                     <img
                       src={file.filePath}

@@ -85,7 +85,7 @@ export default function Login() {
         </div>
         <button type="submit">Login</button>
    <div className={styles.noAccount}>
-   <a href="/register">Don't have an Account?</a>
+   <a href="/register">Don&apos;t have an Account?</a>
    </div>
         {error && <p>{error}</p>}
       </form>
