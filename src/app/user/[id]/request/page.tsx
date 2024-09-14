@@ -170,7 +170,7 @@ const RegisterForm: React.FC = () => {
               <label htmlFor="lastAttended">Last Attended Date:</label>
               <input
                 id="lastAttended"
-                type="text"
+                type="date"
                 value={lastAttended}
                 onChange={(e) => setLastAttended(e.target.value)}
                 required

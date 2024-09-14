@@ -1,0 +1,12 @@
+.wrapper {
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    border: 1px solid gray;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.wrapper h3{
+    padding: 10px;
+}

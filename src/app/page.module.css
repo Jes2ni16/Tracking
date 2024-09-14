@@ -73,3 +73,30 @@
 }
 
 }
+
+.track{
+  display: flex;
+  width: 95%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.track input {
+  width: 95%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  font-size: 20px;
+}
+
+.track button {
+  width: 100px;
+  margin-left: 10px;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #fff;  
+  background-color: #1c9d50;
+}
