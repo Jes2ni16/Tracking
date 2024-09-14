@@ -160,7 +160,7 @@ const DocumentDetails = () => {
 
   const transformedFiles = document?.files?.map(file => ({
     ...file,
-    originalName: removeBasePath(file.originalName, basePath),
+    filePath: removeBasePath(file.filePath, basePath),
   }));
   console.log(transformedFiles)
 
@@ -189,7 +189,7 @@ const DocumentDetails = () => {
       {transformedFiles?.map((file, index) => (
         <li key={index}>
           <img
-            src={`https://tracking-server-9kmt.onrender.com/uploads/${file.originalName}`}
+            src={`https://tracking-server-9kmt.onrender.com/uploads/${file.filePath}`}
             alt={file.originalName}
             style={{ width: '200px', height: 'auto' }} // Adjust size as needed
           />
