@@ -25,6 +25,7 @@ interface Document {
   createdByName: string;
   status: string;
   _id: string;
+
   files:File[];
 }
 
@@ -152,9 +153,16 @@ const DocumentDetails = () => {
         return 'Action';
     }
   };
+  const basePath = "C:\\Users\\Jestoni PC\\Desktop\\New folder\\server\\uploads\\";
+  function removeBasePath(fullPath: string, basePath: string): string {
+    return fullPath.replace(basePath, '');
+  }
 
-  
-  console.log(document?.files)
+  const transformedFiles = document?.files?.map(file => ({
+    ...file,
+    originalName: removeBasePath(file.originalName, basePath),
+  }));
+  console.log(transformedFiles)
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -178,21 +186,16 @@ const DocumentDetails = () => {
       <p className={styles.grid12}><strong>Updated Date:</strong>  {new Date(document.updatedAt).toLocaleDateString()}</p>
       <p className={styles.grid13}><strong>Requirements:</strong> </p>
       <ul>
-              {document.files.map((file,index) => (
-                <li key={index} >
-                  {document.files ? (
-                    <img
-                      src={`https://tracking-server-9kmt.onrender.com/uploads/${file.originalName}`}
-                      alt={file.originalName}
-                      style={{ width: '200px', height: 'auto' }} // Adjust size as needed
-                    />
-                
-                  ) : (
-                    <p><strong>File:</strong> {file.originalName}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
+      {transformedFiles?.map((file, index) => (
+        <li key={index}>
+          <img
+            src={`https://tracking-server-9kmt.onrender.com/uploads/${file.originalName}`}
+            alt={file.originalName}
+            style={{ width: '200px', height: 'auto' }} // Adjust size as needed
+          />
+        </li>
+      ))}
+    </ul>
       </div>
       <div className={styles.buttons}>
       <button className={styles.button1}
