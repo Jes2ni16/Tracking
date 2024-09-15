@@ -146,9 +146,9 @@ const DocumentDetails = () => {
       case 'processing':
         return 'Release';
       case 'releasing':
-        return 'Complete';
-      case 'received':
-        return 'Reviewed';
+        return 'Released';
+      case 'released':
+        return 'Archive';
       default:
         return 'Action';
     }

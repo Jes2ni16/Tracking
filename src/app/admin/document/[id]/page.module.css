@@ -100,3 +100,7 @@ font-size: 18px;
         align-items: center;
         gap: 20px; 
 }
+
+.reqImg img{
+    width: 240px;
+}
