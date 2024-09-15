@@ -186,10 +186,11 @@ const DocumentDetails = () => {
       <p className={styles.grid12}><strong>Updated Date:</strong>  {new Date(document.updatedAt).toLocaleDateString()}</p>
       <p className={styles.grid13}><strong>Requirements:</strong> </p>
       <ul>
-        {transformedFiles?.map((file)=>(
-          <img src={`https://tracking-server-9kmt.onrender.com${file.filePath}`} alt="" />
-        ))
-        }
+      {transformedFiles?.map((file, index) => {
+    const imagePath = `https://tracking-server-9kmt.onrender.com${file.filePath}`;
+    console.log('Image Path:', imagePath);
+    return <img key={index} src={imagePath} alt={`Image ${index}`} />;
+})}
 
     </ul>
       </div>
