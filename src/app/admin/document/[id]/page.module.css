@@ -93,3 +93,10 @@ font-size: 18px;
 .grid13{
    grid-column: span 3;
 }
+
+.reqImg {
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        gap: 20px; 
+}
