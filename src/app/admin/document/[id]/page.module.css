@@ -104,3 +104,6 @@ font-size: 18px;
 .reqImg img{
     width: 240px;
 }
+.failed {
+    color: #ce2020;
+}

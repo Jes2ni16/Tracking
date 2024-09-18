@@ -84,7 +84,7 @@ export default function Login() {
    <div className={styles.noAccount}>
    <a href="/register">Don&apos;t have an Account?</a>
    </div>
-        {error && <p>{error}</p>}
+        {error && <p className='failed'>Incorrect Password or Email</p>}
       </form>
       </div>
     </div>
