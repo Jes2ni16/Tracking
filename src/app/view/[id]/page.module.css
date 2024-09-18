@@ -10,3 +10,12 @@
 .wrapper h3{
     padding: 10px;
 }
+
+.loading{
+    font-size: 36px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+}

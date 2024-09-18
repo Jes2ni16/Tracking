@@ -12,7 +12,8 @@ interface Document {
 const RegisterForm: React.FC = () => {
     const { id } = useParams();
     const [status, setStatus] = useState<string>('');;
-    const [error, setError] = useState<string>('');;
+    const [error, setError] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);;
     const [document, setDocument] = useState<Document | null>(null);
 
     useEffect(() => {
@@ -23,6 +24,7 @@ const RegisterForm: React.FC = () => {
               const data = await response.json();
               setDocument(data);
               setStatus('');
+              setLoading(false)
               setError('');
             } else {
               const errorData = await response.json();
@@ -45,14 +47,17 @@ const RegisterForm: React.FC = () => {
 
   return (
     <main>
-{ document && (
-<div className={styles.wrapper} >
-    <h3>Tracking Number: {document?.trackingNumber}</h3>
-    <h3>Requested File: {document?.filename}</h3>
-    <h3>Status: {document?.status}</h3>
-</div>
-
-)}
+{ loading ? (
+                <div className={styles.loading}>Loading...</div>
+            ) : (
+                document && (
+                    <div className={styles.wrapper}>
+                        <h3>Tracking Number: {document?.trackingNumber}</h3>
+                        <h3>Requested File: {document?.filename}</h3>
+                        <h3>Status: {document?.status}</h3>
+                    </div>
+                )
+            )}
         
    {error && (
     <h2>
