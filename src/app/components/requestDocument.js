@@ -10,47 +10,48 @@ const ModalForm = ({ isOpen, onClose, onSubmit }) => {
     course: '',
     major: '',
     copies: '1',
-    //requirement: null, // Single file
+    // requirement: null, // Placeholder for single file input
   });
 
   useEffect(() => {
     // Event listener to close modal on Esc key press
     const handleEsc = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onClose(); // Close modal if Escape key is pressed
     };
-    document.addEventListener('keydown', handleEsc);
-    return () => document.removeEventListener('keydown', handleEsc);
+    document.addEventListener('keydown', handleEsc); // Add event listener
+    return () => document.removeEventListener('keydown', handleEsc); // Clean up listener on unmount
   }, [onClose]);
 
+  // Return null if modal is not open
   if (!isOpen) return null;
 
   // Handle changes for text and file inputs
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value, files } = e.target; // Destructure event target properties
     if (name === 'requirement') {
       setFormData(prev => ({
         ...prev,
-        [name]: files ? files[0] : null // Handle a single file
+        [name]: files ? files[0] : null // Handle single file input
       }));
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      setFormData(prev => ({ ...prev, [name]: value })); // Update form data for text inputs
     }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
-    const data = new FormData();
+    const data = new FormData(); // Create FormData object
     for (const key in formData) {
       if (key === 'requirement' && formData[key]) {
-        data.append(key, formData[key]); // Append the single file
+        data.append(key, formData[key]); // Append file if it exists
       } else {
-        data.append(key, formData[key]);
+        data.append(key, formData[key]); // Append other form data
       }
     }
 
     try {
-      await onSubmit(data); // Pass FormData to onSubmit
+      await onSubmit(data); // Pass FormData to onSubmit prop
       // Reset form data
       setFormData({
         filename: '',
@@ -60,18 +61,18 @@ const ModalForm = ({ isOpen, onClose, onSubmit }) => {
         course: '',
         major: '',
         copies: '1',
-    //    requirement: null,
+        // requirement: null,
       });
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error submitting form:', error); // Log any errors during submission
     }
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <button className="close" onClick={onClose}>×</button>
-        <form onSubmit={handleSubmit}>
+    <div className="modal"> {/* Modal container */}
+      <div className="modal-content"> {/* Modal content */}
+        <button className="close" onClick={onClose}>×</button> {/* Close button */}
+        <form onSubmit={handleSubmit}> {/* Form submission handler */}
           <label>
             Filename:
             <input
@@ -152,11 +153,11 @@ const ModalForm = ({ isOpen, onClose, onSubmit }) => {
               required
             />
           </label> */}
-          <button type="submit">Submit</button>
+          <button type="submit">Submit</button> {/* Submit button */}
         </form>
       </div>
     </div>
   );
 };
 
-export default ModalForm;
+export default ModalForm; // Export ModalForm component

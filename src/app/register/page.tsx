@@ -4,56 +4,55 @@ import { useRouter } from 'next/navigation';
 
 import styles from './page.module.css'
 
-
 const RegisterForm: React.FC = () => {
-  const router = useRouter();
-  // State to hold form data
-  const [studentId, setStudentId] = useState<string>('');
-  const [firstName, setFirstName] = useState<string>('');
-  const [middleName, setMiddleName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
-  const [dob, setDob] = useState<string>('');
-  const [birthPlace, setBirthPlace] = useState<string>('');
-  const [sex, setSex] = useState<string>('');
-  const [civil, setCivil] = useState<string>('');
-  const [citizenship, setCitizenship] = useState<string>('');
-  const [religion, setReligion] = useState<string>('');
-  const [address, setAddress] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const router = useRouter(); // Initialize router for navigation
 
-  const [contact, setContact] = useState<string>('');
-  const [agreeTerms, setAgreeTerms] = useState<boolean>(false);
+  // State to hold form data
+  const [studentId, setStudentId] = useState<string>(''); // State for student ID
+  const [firstName, setFirstName] = useState<string>(''); // State for first name
+  const [middleName, setMiddleName] = useState<string>(''); // State for middle name
+  const [lastName, setLastName] = useState<string>(''); // State for last name
+  const [dob, setDob] = useState<string>(''); // State for date of birth
+  const [birthPlace, setBirthPlace] = useState<string>(''); // State for birth place
+  const [sex, setSex] = useState<string>(''); // State for gender
+  const [civil, setCivil] = useState<string>(''); // State for civil status
+  const [citizenship, setCitizenship] = useState<string>(''); // State for citizenship
+  const [religion, setReligion] = useState<string>(''); // State for religion
+  const [address, setAddress] = useState<string>(''); // State for address
+  const [email, setEmail] = useState<string>(''); // State for email
+  const [password, setPassword] = useState<string>(''); // State for password
+
+  const [contact, setContact] = useState<string>(''); // State for contact number
+  const [agreeTerms, setAgreeTerms] = useState<boolean>(false); // State for terms agreement
   
   // State to handle loading and errors
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null); // State for error messages
+  const [loading, setLoading] = useState<boolean>(false); // State for loading indicator
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent form submission from reloading the page
 
     // Basic validation
     if (!email || !password ) {
-      setError('All fields are required.');
-      return;
+      setError('All fields are required.'); // Set error if required fields are empty
+      return; // Exit function if validation fails
     }
       
     if (!agreeTerms) {
-        setError('You must agree to the terms and conditions.');
-        return;
+        setError('You must agree to the terms and conditions.'); // Set error if terms are not agreed
+        return; // Exit function if validation fails
       }
 
-
-      setLoading(true);
-    setError(null);
+      setLoading(true); // Set loading state to true
+      setError(null); // Clear any existing errors
 
  try {
   const res = await fetch('https://tracking-server-9kmt.onrender.com/api/users/register', {
-    method: 'POST',
+    method: 'POST', // Set HTTP method to POST
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json', // Specify JSON content type
     },
-    body: JSON.stringify({
+    body: JSON.stringify({ // Prepare body data
       student_id: studentId,
       first_name: firstName,
       middle_name: middleName,
@@ -71,19 +70,18 @@ const RegisterForm: React.FC = () => {
     }),
   });
 
-
+  // Check if response is not OK
   if (!res.ok) {
-    const errorData = await res.json();
-    setError(errorData.message || 'Registration failed.');
-    return;
+    const errorData = await res.json(); // Parse error data
+    setError(errorData.message || 'Registration failed.'); // Set error message
+    return; // Exit function if registration fails
   }
 
-  const data = await res.json();
+  const data = await res.json(); // Parse successful response
 
-    router.push(`/login`);
+    router.push(`/login`); // Redirect to login page after successful registration
   
-
-  // Clear form
+  // Clear form fields
   setEmail('');
   setPassword('');
   setStudentId('');
@@ -100,12 +98,13 @@ const RegisterForm: React.FC = () => {
   setContact('');
 
 } catch (err) {
-  console.error('An error occurred:', err);
-  setError('An error occurred during registration.');
+  console.error('An error occurred:', err); // Log any error that occurs
+  setError('An error occurred during registration.'); // Set error message for general errors
 } finally {
-  setLoading(false);
+  setLoading(false); // Reset loading state
 }
   };
+
 
 
 

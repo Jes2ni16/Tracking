@@ -1,3 +1,4 @@
+// Import necessary hooks and components from React and Next.js
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter , usePathname } from 'next/navigation';
@@ -7,11 +8,12 @@ const RegisterForm: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
 
+  // State variables to handle file inputs for the form
   const [file1, setFile1] = useState<File | null>(null);
   const [file2, setFile2] = useState<File | null>(null);
   const [file3, setFile3] = useState<File | null>(null);
-  
-  // State to hold form data
+
+  // State variables to store form input data
   const [filename, setFilename] = useState<string>('');
   const [purpose, setPurpose] = useState<string>('');
   const [schoolName, setSchoolName] = useState<string>('');
@@ -20,35 +22,32 @@ const RegisterForm: React.FC = () => {
   const [major, setMajor] = useState<string>('');
   const [copies, setCopies] = useState<string>('1');
   const [token, setToken] = useState<string | null>(null);
-  
-  const [message, setMessage] = useState<boolean>(false);
 
-  // State to handle loading and errors
+  // State to handle form submission response message and errors
+  const [message, setMessage] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-
-
+  // Effect hook to fetch token from localStorage on component mount
   useEffect(() => {
-    // Get token from localStorage
     const storedToken = localStorage.getItem('accessToken');
     setToken(storedToken);
   }, []);
 
-
+  // Function to handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
 
-    setLoading(true);
-    setError(null);
+    setLoading(true); // Set loading state
+    setError(null); // Reset error state
 
-        // Append files if they are not null
-
-
+    // Initialize FormData and append selected files
     const formData = new FormData();
     if (file1) formData.append('files', file1);
     if (file2) formData.append('files', file2);
     if (file3) formData.append('files', file3);
+
+    // Append other form data fields to the FormData object
     formData.append('filename', filename);
     formData.append('purpose', purpose);
     formData.append('schoolName', schoolName);
@@ -57,27 +56,25 @@ const RegisterForm: React.FC = () => {
     formData.append('major', major);
     formData.append('copies', copies);
 
-
-
+    // Try block to make API request for form submission
     try {
       const res = await fetch('https://tracking-server-9kmt.onrender.com/api/documents', {
         method: 'POST',
         headers: {
-
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}` // Include token in request header for authorization
         },
-        body: formData,
+        body: formData, // Attach form data in request body
       });
 
+      // Handle response error if request is not successful
       if (!res.ok) {
         const errorData = await res.json();
         setError(errorData.message || 'Registration failed.');
         return;
       }
 
+      // If successful, reset form fields and set success message
       const data = await res.json();
-
-      // Clear form
       setFilename('');
       setPurpose('');
       setSchoolName('');
@@ -88,26 +85,27 @@ const RegisterForm: React.FC = () => {
       setFile1(null);
       setFile2(null);
       setFile3(null);
-      setMessage(true);
+      setMessage(true); // Show success message
 
+      // Redirect user after a short delay
       setTimeout(() => {
-        const parts = pathname.split('/').filter(part => part); // Split and remove empty parts
-
+        const parts = pathname.split('/').filter(part => part); // Split current URL path and remove empty parts
         if (parts.length > 1) {
-          const newPath = `/${parts.slice(0, -1).join('/')}`;
-          router.push(newPath);
+          const newPath = `/${parts.slice(0, -1).join('/')}`; // Create new path by removing the last segment
+          router.push(newPath); // Redirect to the new path
         } else {
-          router.push('/'); // Fallback if there are no more parts
+          router.push('/'); // Fallback to the root path
         }
-      }, 2000);
+      }, 2000); // Redirect after 2 seconds
 
     } catch (err) {
-      setError('An error occurred during registration.');
+      setError('An error occurred during registration.'); // Handle errors
     } finally {
-      setLoading(false);
+      setLoading(false); // Reset loading state
     }
   };
 
+  
   return (
     <main>
       {!message ? 

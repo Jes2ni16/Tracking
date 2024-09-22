@@ -1,194 +1,200 @@
-"use client";
-import React from 'react';
-import { useState , useEffect } from 'react';
-import styles from './page.module.css'
-import { useRouter } from 'next/navigation';
-import { format } from 'date-fns';
-import logout from '../../components/logoutFunction'
+"use client"; // Enables client-side rendering for this component in Next.js
+import React from 'react'; // Import React
+import { useState , useEffect } from 'react'; // Import useState and useEffect hooks for state and lifecycle management
+import styles from './page.module.css'; // Import CSS module for styling
+import { useRouter } from 'next/navigation'; // Import useRouter for programmatic navigation in Next.js
+import { format } from 'date-fns'; // Import the date-fns library for formatting dates
+import logout from '../../components/logoutFunction'; // Import a logout function
 
-
+// Component definition for UserProfile
 export default function UserProfile () {
-    const router = useRouter();
+    const router = useRouter(); // Get the router object for navigation
 
-        const [userData, setUserData] = useState<{ [key: string]: any }>({}); // State to store fetched user data
-        const [documentData, setDocumentData] = useState<any[]>([]); // State to store fetched documents
-        const [loading, setLoading] = useState<boolean>(false); // State to manage loading state for user data
-        const [error, setError] = useState<string>(''); // State to handle user data errors
-        const [loadingDocument, setLoadingDocument] = useState<boolean>(false); // State to manage loading state for documents
-        const [errorDocument, setErrorDocument] = useState<string>(''); // State to handle document errors
-        const [formattedBirthDate, setFormattedBirthDate] = useState<string>('');
-        const [formattedCreatedAt, setFormattedCreatedAt] = useState<string>('');
-    
-        const token = localStorage.getItem('accessToken');
-        const userId = localStorage.getItem('userId');
+    // State to store fetched user data
+    const [userData, setUserData] = useState<{ [key: string]: any }>({}); 
+    // State to store fetched documents
+    const [documentData, setDocumentData] = useState<any[]>([]); 
+    // State to manage loading state for user data
+    const [loading, setLoading] = useState<boolean>(false); 
+    // State to handle user data errors
+    const [error, setError] = useState<string>(''); 
+    // State to manage loading state for documents
+    const [loadingDocument, setLoadingDocument] = useState<boolean>(false); 
+    // State to handle document errors
+    const [errorDocument, setErrorDocument] = useState<string>(''); 
+    // State to store formatted birth date
+    const [formattedBirthDate, setFormattedBirthDate] = useState<string>(''); 
+    // State to store formatted created date
+    const [formattedCreatedAt, setFormattedCreatedAt] = useState<string>(''); 
 
+    // Get the token and user ID from localStorage
+    const token = localStorage.getItem('accessToken'); 
+    const userId = localStorage.getItem('userId'); 
 
-
-        useEffect(() => {
-            const fetchUserData = async () => {
-                if (!userId) {
-                    setError('User ID is not available');
-                    return;
-                }
-            
-                setLoading(true);
-            
-                try {
-                    const response = await fetch(`https://tracking-server-9kmt.onrender.com/api/users/${userId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-            
-                    if (response.status === 401) {
-                        throw new Error('Unauthorized: Token may be invalid or expired');
-                    }
-            
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch user data');
-                    }
-            
-                    const data = await response.json();
-                    setUserData(data);
-                } catch (err) {
-                    if (err instanceof Error) {
-                        setError(err.message);
-                    } else {
-                        setError('An unknown error occurred');
-                    }
-                } finally {
-                    setLoading(false);
-                }
-            };
-            
-            fetchUserData();
-        }, [userId, token]); // Dependencies array
-    
-
-    
-        useEffect(() => {
-            if (!token) {
+    // Fetch user data when component mounts or when token/userId changes
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (!userId) { // Check if userId is available
+                setError('User ID is not available');
                 return;
             }
         
-            const fetchDocumentData = async () => {
+            setLoading(true); // Set loading to true while fetching user data
         
-                try {
-                    const response1 = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-        
-                    if (!response1.ok) {
-                        throw new Error(`Failed to fetch document data: ${response1.statusText}`);
+            try {
+                // Fetch user data from the API
+                const response = await fetch(`https://tracking-server-9kmt.onrender.com/api/users/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // Include the token in the Authorization header
                     }
+                });
         
-                    const data = await response1.json();
-                    const sortedData = data.sort((a:any, b:any) => {
-                        const dateA = new Date(a.createdAt).getTime();
-                        const dateB = new Date(b.createdAt).getTime();
-                        return dateB - dateA; // Newest first
-                      });
-                    setDocumentData(sortedData);
-
-                } catch (err: unknown) {
-                    if (err instanceof Error) {
-                        setErrorDocument(err.message);
-                    } else {
-                        setErrorDocument('An unknown error occurred');
-                    }
-                } finally {
-                    setLoadingDocument(false);
+                if (response.status === 401) {
+                    throw new Error('Unauthorized: Token may be invalid or expired'); // Handle unauthorized status
                 }
-            };
         
-            fetchDocumentData();
-        }, [token]); 
-    
-
-        const handleRequestButton: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-            event.preventDefault();
-           router.push(`/user/${userId}/request`)
-          };
-          useEffect(() => {
-            const birthDate = new Date(userData.birth_date);
-    
-            if (isNaN(birthDate.getTime())) {
-                setFormattedBirthDate('Invalid Date');
-            } else {
-                const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-                setFormattedBirthDate(birthDate.toLocaleDateString('en-US', options));
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user data'); // Handle failed requests
+                }
+        
+                const data = await response.json(); // Parse the response JSON
+                setUserData(data); // Set the user data state
+            } catch (err) {
+                if (err instanceof Error) {
+                    setError(err.message); // Set error message if there is an error
+                } else {
+                    setError('An unknown error occurred');
+                }
+            } finally {
+                setLoading(false); // Set loading to false once the request is complete
             }
-        }, [userData.birth_date]);
+        };
+        
+        fetchUserData(); // Call the fetchUserData function
+    }, [userId, token]); // Dependencies array for when userId or token changes
 
+    // Fetch document data
+    useEffect(() => {
+        if (!token) { // If no token, do not proceed
+            return;
+        }
+    
+        const fetchDocumentData = async () => {
+    
+            try {
+                // Fetch documents data from the API
+                const response1 = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // Include token in the request
+                    }
+                });
+    
+                if (!response1.ok) {
+                    throw new Error(`Failed to fetch document data: ${response1.statusText}`); // Handle failed requests
+                }
+    
+                const data = await response1.json(); // Parse the response JSON
+                // Sort the data by creation date in descending order
+                const sortedData = data.sort((a:any, b:any) => {
+                    const dateA = new Date(a.createdAt).getTime();
+                    const dateB = new Date(b.createdAt).getTime();
+                    return dateB - dateA; // Sort newest first
+                  });
+                setDocumentData(sortedData); // Set the sorted document data
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    setErrorDocument(err.message); // Set error message if there is an error
+                } else {
+                    setErrorDocument('An unknown error occurred');
+                }
+            } finally {
+                setLoadingDocument(false); // Set loading to false once the request is complete
+            }
+        };
+    
+        fetchDocumentData(); // Call the fetchDocumentData function
+    }, [token]); // Dependencies array for when token changes
+
+    // Handle button click to request a document
+    const handleRequestButton: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+        event.preventDefault();
+       router.push(`/user/${userId}/request`); // Navigate to the request page
+    };
+
+    // Format birth date
+    useEffect(() => {
+        const birthDate = new Date(userData.birth_date);
+
+        if (isNaN(birthDate.getTime())) {
+            setFormattedBirthDate('Invalid Date'); // Handle invalid dates
+        } else {
+            const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            setFormattedBirthDate(birthDate.toLocaleDateString('en-US', options)); // Format the date
+        }
+    }, [userData.birth_date]); // Dependencies array for when birth_date changes
+
+    // Format created date
     useEffect(() => {
         const createdAt = new Date(userData.birth_date);
 
         if (isNaN(createdAt.getTime())) {
-            setFormattedCreatedAt('Invalid Date');
+            setFormattedCreatedAt('Invalid Date'); // Handle invalid dates
         } else {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            setFormattedCreatedAt(createdAt.toLocaleDateString('en-US'));
+            setFormattedCreatedAt(createdAt.toLocaleDateString('en-US')); // Format the date
         }
-    }, [userData.createdAt]);
-   
-         
+    }, [userData.createdAt]); // Dependencies array for when createdAt changes
+
+    // Function to calculate user's age based on birth date
     function calculateAge(birthDateString: string): number | string {
-        // Check if birthDateString is provided
         if (!birthDateString) {
-            return 'Birth date string is missing';
+            return 'Birth date string is missing'; // Return message if birth date is missing
         }
     
-        // Create a Date object from the birthDateString
-        const birthDate = new Date(birthDateString);
+        const birthDate = new Date(birthDateString); // Create a Date object from the birth date
     
-        // Check if the birthDate is valid
         if (isNaN(birthDate.getTime())) {
-            return 'Invalid Date';
+            return 'Invalid Date'; // Handle invalid dates
         }
     
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
+        const today = new Date(); // Get today's date
+        let age = today.getFullYear() - birthDate.getFullYear(); // Calculate the age
         const monthDifference = today.getMonth() - birthDate.getMonth();
     
-        // Adjust age if the current month is before the birth month or if it's the birth month but the current day is before the birth day
+        // Adjust age if the current month/day is before the birth month/day
         if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
             age--;
         }
     
-        return age;
+        return age; // Return the calculated age
     }
 
-    //for log out function 
+    // Function to handle user logout
     const logoutBtn = () => {
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('userId')
-
-        router.push('/login')
+        localStorage.removeItem('accessToken'); // Remove the token from localStorage
+        localStorage.removeItem('userId'); // Remove the userId from localStorage
+        router.push('/login'); // Navigate to the login page
     }
 
+    // Function to format a date string using date-fns
     function formatDateString(dateString: string): string {
         const date = new Date(dateString);
     
         if (isNaN(date.getTime())) {
-            throw new Error('Invalid date string');
+            throw new Error('Invalid date string'); // Handle invalid date strings
         }
     
-        return format(date, 'MM/dd/yy');
+        return format(date, 'MM/dd/yy'); // Format the date using date-fns
     }
-    
 
-
-
-    const age = calculateAge(userData.birth_date)
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
-    if (errorDocument) return <p>Error: {errorDocument}</p>;
+    const age = calculateAge(userData.birth_date); // Calculate the user's age
+    if (loading) return <p>Loading...</p>; // Display loading message while fetching data
+    if (error) return <p>Error: {error}</p>; // Display error message if there is an error fetching user data
+    if (errorDocument) return <p>Error: {errorDocument}</p>; // Display error message if there is an error fetching documents
 
     return(
     

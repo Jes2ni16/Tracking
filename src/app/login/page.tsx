@@ -5,49 +5,40 @@ import { useRouter } from 'next/navigation';
 import styles from './page.module.css'
 
 export default function Login() {
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState<string | null>(null);
-    const router = useRouter();
+    const [email, setEmail] = useState<string>(''); // State for email input
+    const [password, setPassword] = useState<string>(''); // State for password input
+    const [error, setError] = useState<string | null>(null); // State for error messages
+    const router = useRouter(); // Initialize router for navigation
 
-
-  
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-      e.preventDefault(); 
+        e.preventDefault(); // Prevent default form submission behavior
   
-   
         const res = await fetch('https://tracking-server-9kmt.onrender.com/api/users/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
+            method: 'POST', // Set HTTP method to POST
+            headers: {
+                'Content-Type': 'application/json', // Specify JSON content type
+            },
+            body: JSON.stringify({ email, password }), // Prepare body data with email and password
         });     
-  
-        if (res.ok) {
-            const data = await res.json();
-            localStorage.setItem('accessToken', data.accessToken);
-            localStorage.setItem('userId', data.user.id);
 
-           
-          //  const userId = data.user.id; 
-          if (data.user.role === 'admin') {
-            router.push(`/admin/`);
-          }else if(data.user.role === 'student'){
-            router.push(`/user/${data.user.id}`);
-          }else{
-            router.push(`/user/${data.user.id}`);
-          }
+        if (res.ok) { // Check if response is OK
+            const data = await res.json(); // Parse successful response
+            localStorage.setItem('accessToken', data.accessToken); // Store access token in localStorage
+            localStorage.setItem('userId', data.user.id); // Store user ID in localStorage
 
-            // Redirect to the user's profile page using their ID
-    
-
-          } else {
+            // Check user role and redirect accordingly
+            if (data.user.role === 'admin') {
+                router.push(`/admin/`); // Redirect to admin page if user is an admin
+            } else if (data.user.role === 'student') {
+                router.push(`/user/${data.user.id}`); // Redirect to student's profile page
+            } else {
+                router.push(`/user/${data.user.id}`); // Fallback to user's profile page
+            }
+        } else {
             // Handle login failure
-            setError('Login failedss');
-          }
-        };
-    
+            setError('Login failedss'); // Set error message for failed login
+        }
+    };
 
 
   return (
