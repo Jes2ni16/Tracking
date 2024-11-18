@@ -6,8 +6,8 @@
     margin-top: 50px;
 position: relative;
 }
-p ,td,th{
-    color: #000;
+p ,td , th{
+    color: #000!important;
 }
 
 .profileInfo {
