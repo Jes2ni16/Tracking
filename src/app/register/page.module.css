@@ -46,6 +46,8 @@
     border: 1px solid #ccc;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
+    color: #000;
+    background-color: #fff;
   }
   .inputBox select{
     height: 35px;

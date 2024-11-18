@@ -47,7 +47,7 @@ const AdminPage: React.FC = () => {
     useEffect(() => {
         if(!token) return;
 
-
+//This function is to get the specific document
         const fetchDocuments = async () => {
             try {
                 
@@ -86,7 +86,7 @@ const AdminPage: React.FC = () => {
 
 console.log(documents)
 
-
+//this function is to get the user of the document
     useEffect(() => {
         if(!token) return;
         const fetchUsers = async () => {
@@ -136,6 +136,7 @@ console.log(documents)
     };
 
 
+    //this function is used to filter the documents based on status
     const getFilteredDocuments = (status1?: string, status2?: string) => {
         setHome(true)
         let filtered = documents;
@@ -151,13 +152,14 @@ if (status1 === '') {
        
     }
 
+    //this function is to get the username of the user via id
     const getUserNameById = (userId: string) => {
         const user = users.find(user => user._id === userId);
         return user ?  `${user.first_name} ${user.last_name}` : 'Unknown User';
     };
 
+    //this function is to format the date
 const formatDate = (createdAt : string) => {
-
 const date = new Date(createdAt);
 
 const formattedDate = format(date, 'MMMM dd, yyyy '); // Adjust format as needed
@@ -168,6 +170,8 @@ return formattedDate;
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
+
+    //this function is to handle the status if the document
 const handleStatusChange = async (documentId: string, currentStatus: string) => {
     const isConfirmed = window.confirm('Are you sure you want to update the document status?');
     
@@ -229,6 +233,7 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
     }
   };
 
+  //this function is to delete the document
 const handleDelete = async (documentId: string) =>{
     const isConfirmed = window.confirm('Are you sure you want to update the document status?');
     if (!isConfirmed) return;

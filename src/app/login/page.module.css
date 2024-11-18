@@ -38,6 +38,8 @@
     margin-top: 15px;
     width: 90%;
     max-width: 500px;
+    color: #000;
+    background-color: #fff;
   }
 
   .formArea button {
