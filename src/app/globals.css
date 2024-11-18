@@ -98,6 +98,8 @@ a {
   text-decoration: none;
 }
 
+p, td, th
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -41,6 +41,7 @@ p ,td , th{
 }
 .profileDetails ul li p{
     flex: 1;
+    color: #000;
 }
 
 .documentArea {
@@ -64,6 +65,7 @@ p ,td , th{
     border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  color: #000;
 }
 
 .docReq th{
@@ -117,6 +119,7 @@ p ,td , th{
     border: 1px solid #dddddd;
  padding: 8px; 
     text-align: left;
+    color: #000;
 }
 
 .requestedDoc td {
