@@ -35,6 +35,7 @@
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
+    color: #000;
   }
 
   .inputBox input{
@@ -60,6 +61,8 @@
     border: 1px solid #ccc;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
+    color: #000;
+    background-color: #fff;
   }
   .inputBox select{
     height: 35px;
@@ -71,6 +74,8 @@
     border: 1px solid #ccc;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
+    color: #000;
+    background-color: #fff;
   }
 
 .requestBtn {
