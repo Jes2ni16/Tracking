@@ -234,40 +234,44 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
   };
 
   //this function is to delete the document
-const handleDelete = async (documentId: string) =>{
+  const handleDelete = async (documentId: string) => {
     const isConfirmed = window.confirm('Are you sure you want to update the document status?');
     if (!isConfirmed) return;
+  
+    setLoading(true); // Start loading state
+  
     try {
-        const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${documentId}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ status: 'archived' }),
-        });
-    
-        if (!res.ok) {
-          throw new Error('Failed to update status');
-        }
-    
-        // Update the local state to reflect the new status
-        setDocuments(prevDocuments =>
-          prevDocuments.map(doc =>
-            doc._id === documentId ? { ...doc, status: 'archived'} : doc
-          )
-        );
-        setLastFetched(Date.now());
-    } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError('An unknown error occurred');
-        }
-      } finally {
-        setLoading(false);
+      const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${documentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!res.ok) {
+        throw new Error('Failed to delete document');
       }
-}
+  
+      // Update the local state to reflect the new status
+      setDocuments((prevDocuments) =>
+        prevDocuments.map((doc) =>
+          doc._id === documentId ? { ...doc, status: 'archived' } : doc
+        )
+      );
+      setLastFetched(Date.now());
+    } catch (error) {
+      console.error('Error deleting document:', error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unknown error occurred');
+      }
+    } finally {
+      setLoading(false); // End loading state
+    }
+  };
+  
 
     return (
         <main className={styles.wrapper}>
