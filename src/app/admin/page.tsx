@@ -278,7 +278,7 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
             <div className={styles.navigation}>
                 <div className={styles.profile}>
                     <span className={styles.profilePic}></span>
-                    <h3 className={styles.profileName}>Jestoni D. Brion</h3>
+                    <h3 className={styles.profileName}>Philca Admin Account</h3>
                 </div>
                 <hr />
                 <div className={styles.navPanel}>
