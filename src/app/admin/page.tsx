@@ -278,7 +278,7 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
             <div className={styles.navigation}>
                 <div className={styles.profile}>
                     <span className={styles.profilePic}></span>
-                    <h1 className={styles.profileName}>Philsca </h1>
+                    <h1 className={styles.profileName}>PHILSCA </h1>
                 </div>
                 <hr />
                 <div className={styles.navPanel}>
