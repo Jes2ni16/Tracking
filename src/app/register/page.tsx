@@ -73,7 +73,7 @@ const RegisterForm: React.FC = () => {
   // Check if response is not OK
   if (!res.ok) {
     const errorData = await res.json(); // Parse error data
-    setError(errorData.message || 'Registration failed.'); // Set error message
+    setError(errorData.error || 'Registration failed.'); // Set error message
     return; // Exit function if registration fails
   }
 
