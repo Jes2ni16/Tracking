@@ -122,20 +122,14 @@ const RegisterForm: React.FC = () => {
                 required
               >
                 <option value="" disabled>-- SELECT --</option>
-                <option value="cav">CAV</option>
-                <option value="diploma">Diploma</option>
-                <option value="Certified Copy">Certified Copy</option>
-                <option value="Earned Units/CAR [Certification /Letter]">Earned Units/CAR [Certification /Letter]</option>
+                <option value="CAV">CAV</option>
+                <option value="Diploma">DIPLOMA</option>
+                <option value="CERTIFIED COPY">CERTIFIED COPY</option>
+                <option value="Earned Units/CAR [Certification /Letter]">EARNED UNITS/CAR [Certification / Letter]</option>
                 <option value="Enrollment [Certification /Letter]">Enrollment [Certification /Letter]</option>
                 <option value="Grade(s) of Cross Enrollee [Certification /Letter]">Grade(s) of Cross Enrollee [Certification /Letter]</option>
-                <option value="dGraduation [Certification /Letter]">Graduation [Certification /Letter]</option>
+                <option value="Graduation [Certification /Letter]">Graduation [Certification /Letter]</option>
                 <option value="GWA [Certification /Letter]">GWA [Certification /Letter]</option>
-                <option value="English Language as Medium of Instruction [Certification /Letter]">English Language as Medium of Instruction [Certification /Letter]</option>
-                <option value="No Objection [Certification /Letter]">No Objection [Certification /Letter]</option>
-                <option value="S.O Exemption [Certification /Letter]">S.O Exemption [Certification /Letter]</option>
-                <option value="S.P. to Cross Enroll [Certification /Letter]">S.P. to Cross Enroll [Certification /Letter]</option>
-                <option value="2nd Request of GTC [Certification /Letter]">2nd Request of GTC [Certification /Letter]</option>
-                <option value="Certificate of Enrollment">Certificate of Enrollment</option>
                 
               </select>
             </div>
@@ -144,56 +138,29 @@ const RegisterForm: React.FC = () => {
               <label htmlFor="purpose">Purpose:</label>
               <textarea
                 id="purpose"
-             
                 value={purpose}
                 onChange={(e) => setPurpose(e.target.value)}
                 required
               />
             </div>
 
-            <div className={styles.inputBox}>
-              <label htmlFor="schoolName">Name of School in College:</label>
-              <input
-                id="schoolName"
-                type="text"
-                value={schoolName}
-                onChange={(e) => setSchoolName(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className={styles.inputBox}>
-              <label htmlFor="lastAttended">Last Attended Date:</label>
-              <input
-                id="lastAttended"
-                type="date"
-                value={lastAttended}
-                onChange={(e) => setLastAttended(e.target.value)}
-                required
-              />
-            </div>
 
             <div className={styles.inputBox}>
               <label htmlFor="course">Course:</label>
-              <input
+              <select
                 id="course"
-                type="text"
                 value={course}
                 onChange={(e) => setCourse(e.target.value)}
                 required
-              />
+              >
+            <option value="" disabled>-- SELECT --</option>
+            <option value="Aircraft Maintenance Technology (AMT)" >Aircraft Maintenance Technology (AMT)</option>
+            <option value="Aviation Electronics Technology (AET)" >Aviation Electronics Technology (AET)</option>
+            <option value="Aviation Tourism (AVTour)" >Aviation Tourism (AVTour)</option>
+            <option value="Aviation Information System (AIS)" >Aviation Information System (AIS)</option>
+          </select>
             </div>
 
-            <div className={styles.inputBox}>
-              <label htmlFor="major">Major <span>(optional)</span>:</label>
-              <input
-                id="major"
-                type="text"
-                value={major}
-                onChange={(e) => setMajor(e.target.value)}
-                required
-              />
-            </div>
 
             <div className={styles.inputBox}>
               <label htmlFor="copies">Number of Copies:</label>

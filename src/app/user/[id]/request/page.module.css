@@ -133,6 +133,10 @@ height: 100vh;
     cursor: pointer;
   }
 
+  .reqFiles input[type="file"] {
+    display: none;
+  }
+
   .reqFiles label {
  display: block;
     font-weight: 500;

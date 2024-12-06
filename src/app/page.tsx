@@ -56,7 +56,7 @@ export default function Home() {
       <main className={styles.main}> {/* Main content section with styling */}
 
         <div className={styles.box}> {/* Container for the logo, title, and input box */}
-          <img src="/logo-philsca.png" alt="" className={styles.logo} /> {/* Logo Image */}
+          <img src="/logo-philsca.png" alt="" className={styles.logo} /> 
           <h1> PHILSCA MEDELLIN TRACKING SYSTEM OF ACADEMIC CREDENTIALS</h1> {/* Title */}
 
           <div className={styles.authWrap}> {/* Container for the tracking input and buttons */}
