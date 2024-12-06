@@ -124,13 +124,11 @@ const RegisterForm: React.FC = () => {
               >
                 <option value="" disabled>-- SELECT --</option>
                 <option value="CAV">CAV</option>
-                <option value="Diploma">DIPLOMA</option>
-                <option value="CERTIFIED COPY">CERTIFIED COPY</option>
-                <option value="Earned Units/CAR [Certification /Letter]">EARNED UNITS/CAR [Certification / Letter]</option>
-                <option value="Enrollment [Certification /Letter]">Enrollment [Certification /Letter]</option>
-                <option value="Grade(s) of Cross Enrollee [Certification /Letter]">Grade(s) of Cross Enrollee [Certification /Letter]</option>
-                <option value="Graduation [Certification /Letter]">Graduation [Certification /Letter]</option>
-                <option value="GWA [Certification /Letter]">GWA [Certification /Letter]</option>
+                <option value="Certification">Certification (any kind)</option>
+                <option value="Certified Copies">Certified Copies (Any Kind)</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Transcript of Records (TOR)">Transcript of Records (TOR)</option>
+                <option value="Evaluation of Grades">Evaluation of Grades</option>
                 
               </select>
             </div>

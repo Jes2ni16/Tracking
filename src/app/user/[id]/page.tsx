@@ -239,40 +239,55 @@ export default function UserProfile () {
   <tr>
     <td>CAV</td>
     <td>7 working days</td>
-    <td>1. Certified copy of TOR and Diploma/Certificate or
-    2. Certified copy of TOR and Certification of earned units</td>
-    <td>50.00 </td>
+    <td>PSA Original,<br />
+Certificate of Enrollment, <br />
+Documentary Stamp
+</td>
+    <td>100.00 </td>
   </tr>
   <tr>
-    <td>Certification</td>
+    <td>Certification (any kind)</td>
     <td>3 working days</td>
-    <td>1. Clearance if first request</td>
-    <td>50.00</td>
+    <td>PSA Original, <br />
+Documentary Stamp
+</td>
+    <td>100.00</td>
   </tr>
+
   <tr>
-    <td>Certified Copy</td>
+    <td>Any Certified Copies</td>
     <td>3 working days</td>
-    <td>1. Original and photocopy of the documents</td>
-    <td>50.00/document</td>
+    <td>1PSA Original, <br />
+Documentary Stamp
+</td>
+    <td>100.00</td>
   </tr>
   <tr>
-    <td>Diploma/Certificate</td>
+    <td>Diploma</td>
     <td>7 working days</td>
-    <td>1. Clearance if first request</td>
-    <td>Undergraduate programs= 200(+50 for succeeding issuance) Graduate programs= 300(+50 for succeeding issuance)</td>
+    <td>PSA Original, <br />
+Documentary Stamp, <br />
+Transcript of Records
+</td>
+    <td>265.00</td>
   </tr>
   <tr>
-    <td>Transcript of Records</td>
+    <td>Transcript of Records (TOR)</td>
     <td>7 working days</td>
-    <td>1. Clearance if first request and if for transfer purposes
-    2. 2X2 picture with white background or in academic gown</td>
-    <td>50.00/page-local purposes 75.00/page-international purposes</td>
+    <td> Form 137A
+PSA Original,
+Documentary Stamp, <br />
+2v2 picture (with nametag and white background)
+</td>
+    <td>100.00</td>
   </tr>
   <tr>
     <td>Evaluation of Grades</td>
     <td>3 working days</td>
-    <td> Certificate of Enrollment</td>
-    <td>80.00</td>
+    <td>PSA Original, <br />
+Documentary Stamp
+</td>
+    <td>200</td>
   </tr>
 </table>
             </div>
