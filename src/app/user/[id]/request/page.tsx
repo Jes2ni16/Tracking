@@ -16,6 +16,7 @@ const RegisterForm: React.FC = () => {
   // State variables to store form input data
   const [filename, setFilename] = useState<string>('');
   const [purpose, setPurpose] = useState<string>('');
+  const [course, setCourse] = useState<string>('');
   const [copies, setCopies] = useState<string>('1');
   const [token, setToken] = useState<string | null>(null);
 
@@ -47,6 +48,7 @@ const RegisterForm: React.FC = () => {
     // Append other form data fields to the FormData object
     formData.append('filename', filename);
     formData.append('purpose', purpose);
+    formData.append('course', course);
     formData.append('copies', copies);
 
     // Try block to make API request for form submission
@@ -70,6 +72,7 @@ const RegisterForm: React.FC = () => {
       const data = await res.json();
       setFilename('');
       setPurpose('');
+      setCourse('');
       setCopies('');
       setFile1(null);
       setFile2(null);
