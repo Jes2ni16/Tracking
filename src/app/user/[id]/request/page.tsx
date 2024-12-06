@@ -195,6 +195,11 @@ const RegisterForm: React.FC = () => {
       >
         Upload File
       </label>
+      {file1 && (
+        <div style={{ marginTop: "10px", color: "#333" }}>
+          <strong>Selected file:</strong> {filename}
+        </div>
+      )}
       <input
       id="fileUpload2"
         type="file"
@@ -230,7 +235,7 @@ const RegisterForm: React.FC = () => {
           fontSize: "16px",
           borderRadius: "4px"
         }}
-      ></label>
+      >Upload File</label>
         </div>
         </div>
 
