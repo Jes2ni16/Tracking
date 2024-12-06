@@ -178,16 +178,59 @@ const RegisterForm: React.FC = () => {
           <div>
           <input
         type="file"
+        id="fileUpload1" 
         onChange={(e) => e.target.files && setFile1(e.target.files[0])}
       />
+            <label 
+        htmlFor="fileUpload1" 
+        style={{
+          backgroundColor: "#4CAF50",
+          color: "white",
+          padding: "10px 20px",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "16px",
+          borderRadius: "4px"
+        }}
+      >
+        Upload File
+      </label>
       <input
+      id="fileUpload2"
         type="file"
         onChange={(e) => e.target.files && setFile2(e.target.files[0])}
       />
+             <label 
+        htmlFor="fileUpload2" 
+        style={{
+          backgroundColor: "#4CAF50",
+          color: "white",
+          padding: "10px 20px",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "16px",
+          borderRadius: "4px"
+        }}
+      >
+        Upload File
+      </label>
       <input
+      id="fileUpload3" 
         type="file"
         onChange={(e) => e.target.files && setFile3(e.target.files[0])}
       />
+         <label 
+        htmlFor="fileUpload3" 
+        style={{
+          backgroundColor: "#4CAF50",
+          color: "white",
+          padding: "10px 20px",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "16px",
+          borderRadius: "4px"
+        }}
+      ></label>
         </div>
         </div>
 
