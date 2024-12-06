@@ -141,7 +141,11 @@ height: 100vh;
  display: block;
     font-weight: 500;
     margin-bottom: 5px;
+    font-size: 18px;
   }
+  .reqFiles label span{
+    font-size: 12px;
+     }
 
   .reqFiles div{
     border: 1px solid #ccc;
