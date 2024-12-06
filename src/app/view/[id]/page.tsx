@@ -8,6 +8,7 @@ interface Document {
     trackingNumber: string;
     filename: string;
     status: string;
+    releaseDate:string;
 }
 
 // RegisterForm component to fetch and display document details based on tracking ID.
@@ -64,7 +65,9 @@ const RegisterForm: React.FC = () => {
           <div className={styles.wrapper}>
             <h3>Tracking Number: {document?.trackingNumber}</h3> {/* Display the tracking number */}
             <h3>Requested File: {document?.filename}</h3> {/* Display the filename */}
-            <h3>Status: {document?.status}</h3> {/* Display the document status */}
+            <h3 style={{textTransform: 'capitalize'}}>Status: {document?.status === 'releasing' && (
+  <p>on {document.releaseDate} 08:00 AM -  04:00 PM</p>
+)}</h3> {/* Display the document status */}
           </div>
         )
       )}
