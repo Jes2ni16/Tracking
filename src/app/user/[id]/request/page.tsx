@@ -43,7 +43,8 @@ const RegisterForm: React.FC = () => {
 
     // Initialize FormData and append selected files
     const formData = new FormData();
-    if (file1) formData.append('files', file1);
+    const fileNames: string[] = [];
+    if (file1){ formData.append('files', file1)};
     if (file2) formData.append('files', file2);
     if (file3) formData.append('files', file3);
 
@@ -197,7 +198,7 @@ const RegisterForm: React.FC = () => {
       </label>
       {file1 && (
         <div style={{ marginTop: "10px", color: "#333" }}>
-          <strong>Selected file:</strong> {filename}
+          <strong>Selected file:</strong> {file1.name}
         </div>
       )}
       <input
@@ -219,6 +220,11 @@ const RegisterForm: React.FC = () => {
       >
         Upload File
       </label>
+      {file2 && (
+        <div style={{ marginTop: "10px", color: "#333" }}>
+          <strong>Selected file:</strong> {file2.name}
+        </div>
+      )}
       <input
       id="fileUpload3" 
         type="file"
@@ -236,6 +242,11 @@ const RegisterForm: React.FC = () => {
           borderRadius: "4px"
         }}
       >Upload File</label>
+        {file3 && (
+        <div style={{ marginTop: "10px", color: "#333" }}>
+          <strong>Selected file:</strong> {file3.name}
+        </div>
+      )}
         </div>
         </div>
 
