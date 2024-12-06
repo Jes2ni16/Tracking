@@ -12,6 +12,7 @@ interface Document {
     filename: string;
     status: string;
     createdBy: string;
+    releaseDate?: string; 
 }
 
 interface User {
@@ -118,22 +119,22 @@ console.log(documents)
         fetchUsers();
     }, [token]); 
 
-    const getButtonText = (status:string) => {
-        switch (status) {
-            case 'Draft':
-                return 'Accept';
-            case 'viewed':
-                return 'Process';
-            case 'process':
-                return 'Release';
-            case 'releasing':
-                return 'Released';
-            case 'released':
-                return 'Archived';
-            default:
-                return ;
-        }
-    };
+    const getButtonText = (status: string) => {
+      switch (status) {
+          case 'Draft':
+              return 'Accept';
+          case 'viewed':
+              return 'Process';
+          case 'process':
+              return 'Release';
+          case 'to be released':
+              return 'Mark as Released';
+          case 'released':
+              return 'Archived';
+          default:
+              return '';
+      }
+  };
 
 
     //this function is used to filter the documents based on status
@@ -172,67 +173,71 @@ return formattedDate;
 
 
     //this function is to handle the status if the document
-const handleStatusChange = async (documentId: string, currentStatus: string) => {
-    const isConfirmed = window.confirm('Are you sure you want to update the document status?');
-    
-    if (!isConfirmed) return;
+    const handleStatusChange = async (documentId: string, currentStatus: string) => {
+      const isConfirmed = window.confirm('Are you sure you want to update the document status?');
+      
+      if (!isConfirmed) return;
   
-    setLoading(true);
-    setError(null);
+      setLoading(true);
+      setError(null);
   
-    let newStatus: string | null = null;
+      let newStatus: string | null = null;
+      let releaseDate: string | null = null;
   
-    switch (currentStatus) {
-      case 'Draft':
-        newStatus = 'viewed';
-        break;
-      case 'viewed':
-        newStatus = 'process';
-        break;
-      case 'process':
-        newStatus = 'releasing';
-        break;
-      case 'releasing':
-        newStatus = 'released';
-        break;
-      default:
-        setLoading(false);
-        setError('Invalid current status');
-        return;
-    }
-  
-    try {
-      const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${documentId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ status: newStatus }),
-      });
-  
-      if (!res.ok) {
-        throw new Error('Failed to update status');
+      switch (currentStatus) {
+          case 'Draft':
+              newStatus = 'viewed';
+              break;
+          case 'viewed':
+              newStatus = 'process';
+              break;
+          case 'process':
+              newStatus = 'to be released';
+              releaseDate = new Date().toISOString(); // Add current date
+              break;
+          case 'to be released':
+              newStatus = 'released';
+              break;
+          default:
+              setLoading(false);
+              setError('Invalid current status');
+              return;
       }
   
-      // Update the local state to reflect the new status
-      setDocuments(prevDocuments =>
-        prevDocuments.map(doc =>
-          doc._id === documentId ? { ...doc, status: newStatus } : doc
-        )
-      );
-      setLastFetched(Date.now());
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError('An unknown error occurred');
+      try {
+          const res = await fetch(`https://tracking-server-9kmt.onrender.com/api/documents/${documentId}`, {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`,
+              },
+              body: JSON.stringify({ status: newStatus, releaseDate }), // Include releaseDate if applicable
+          });
+  
+          if (!res.ok) {
+              throw new Error('Failed to update status');
+          }
+  
+          // Update the local state to reflect the new status
+          setDocuments(prevDocuments =>
+              prevDocuments.map(doc =>
+                  doc._id === documentId
+                      ? { ...doc, status: newStatus, releaseDate: releaseDate || doc.releaseDate }
+                      : doc
+              )
+          );
+          setLastFetched(Date.now());
+      } catch (error) {
+          if (error instanceof Error) {
+              setError(error.message);
+          } else {
+              setError('An unknown error occurred');
+          }
+      } finally {
+          setLoading(false);
       }
-    } finally {
-      setLoading(false);
-    }
   };
-
+  
   //this function is to delete the document
   const handleDelete = async (documentId: string) => {
     const isConfirmed = window.confirm('Are you sure you want to update the document status?');
@@ -299,9 +304,6 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
                     <p 
                      className={selectedFilter === 'releasing' ? styles.selected : ''}
                     onClick={()=>getFilteredDocuments('releasing','releasing')}>For Release</p>
-                    <p
-                     className={selectedFilter === 'released' ? styles.selected : ''}
-                    onClick={()=>getFilteredDocuments('released','released')}>Released</p>
                        <p
                      className={selectedFilter === 'archived' ? styles.selected : ''}
                     onClick={()=>getFilteredDocuments('archived','archived')}>Archived</p>
@@ -335,17 +337,19 @@ const handleStatusChange = async (documentId: string, currentStatus: string) => 
             <td>{formatDate(data.createdAt)}</td>
             <td>{data.filename}</td>
             <td>{getUserNameById(data.createdBy)}</td>
-            <td>{data.status}</td>
             <td>
-                <button
-                    className={styles.acceptBtn}
-                    onClick={() => handleStatusChange(data._id, data.status)}
-                    disabled={loading}
-                >
-                    {loading
-                                    ? 'Processing...'
-                                    : getButtonText(data.status)}
-                </button>
+            {data.status === 'to be released' && data.releaseDate
+                ? `To be released on ${formatDate(data.releaseDate)}`
+                : data.status}
+        </td>
+            <td>
+            <button
+                className={styles.acceptBtn}
+                onClick={() => handleStatusChange(data._id, data.status)}
+                disabled={loading}
+            >
+                {loading ? 'Processing...' : getButtonText(data.status)}
+            </button>
                 <button className={styles.deleteBtn} onClick={()=>handleDelete(data._id)}>Delete</button>
             </td>
             <td>
