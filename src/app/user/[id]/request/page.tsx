@@ -143,7 +143,6 @@ const RegisterForm: React.FC = () => {
               />
             </div>
 
-
             <div className={styles.inputBox}>
               <label htmlFor="course">Course:</label>
               <select
@@ -183,13 +182,12 @@ const RegisterForm: React.FC = () => {
             <label 
         htmlFor="fileUpload1" 
         style={{
-          backgroundColor: "#4CAF50",
-          color: "white",
-          padding: "10px 20px",
-          border: "none",
-          cursor: "pointer",
-          fontSize: "16px",
-          borderRadius: "4px"
+               color: '#000',
+          padding: '10px 20px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          borderRadius: '4px',
+          border: '1px solid #ebe6e6',
         }}
       >
         Upload File
@@ -207,13 +205,12 @@ const RegisterForm: React.FC = () => {
              <label 
         htmlFor="fileUpload2" 
         style={{
-          backgroundColor: "#4CAF50",
-          color: "white",
-          padding: "10px 20px",
-          border: "none",
-          cursor: "pointer",
-          fontSize: "16px",
-          borderRadius: "4px"
+               color: '#000',
+          padding: '10px 20px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          borderRadius: '4px',
+          border: '1px solid #ebe6e6',
         }}
       >
         Upload File
@@ -231,13 +228,12 @@ const RegisterForm: React.FC = () => {
          <label 
         htmlFor="fileUpload3" 
         style={{
-          backgroundColor: "#4CAF50",
-          color: "white",
-          padding: "10px 20px",
-          border: "none",
-          cursor: "pointer",
-          fontSize: "16px",
-          borderRadius: "4px"
+               color: '#000',
+          padding: '10px 20px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          borderRadius: '4px',
+          border: '1px solid #ebe6e6',
         }}
       >Upload File</label>
         {file3 && (
