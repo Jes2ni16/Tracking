@@ -190,8 +190,8 @@ const RegisterForm: React.FC = () => {
           required
         >
           <option value="" disabled>Select your sex</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
           </select>
       </div>
 
@@ -204,35 +204,45 @@ const RegisterForm: React.FC = () => {
           required
         >
           <option value="" disabled>-- SELECT --</option>
-          <option value="single">Single</option>
-          <option value="married">Married</option>
-          <option value="separated">Separated</option>
-          <option value="annulled">Annulled</option>
-          <option value="widow">Widow</option>
-          <option value="divorced">Divorced</option>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Separated">Separated</option>
+          <option value="Annulled">Annulled</option>
+          <option value="Widow">Widow</option>
+          <option value="Divorced">Divorced</option>
           </select>
       </div>
 
       <div className={styles.inputBox}>
         <label htmlFor="citizenship">Citizenship: </label>
-        <input
+        <select
           id="citizenship"
-          type="text"
           value={citizenship}
           onChange={(e) => setCitizenship(e.target.value)}
           required
-        />
+        >
+<option value="" disabled>-- SELECT --</option>
+<option value="Filipino">Filipino</option>
+<option value="American">American</option>
+        </select>
       </div>
       
       <div className={styles.inputBox}>
         <label htmlFor="religion">religion: </label>
-        <input
+        <select
           id="religion"
-          type="text"
           value={religion}
           onChange={(e) => setReligion(e.target.value)}
           required
-        />
+        >
+<option value="" disabled>-- SELECT --</option>
+<option value="Catholic">Catholic</option>
+<option value="Islam">Islam</option>
+<option value="Iglesia ni Cristo">Iglesia ni Cristo</option>
+<option value="Seventh-day Adventist">Seventh-day Adventist</option>
+<option value="The Church of Jesus Christ of Latter-day Saints">The Church of Jesus Christ of Latter-day Saints</option>
+
+        </select>
       </div>
 
       <div className={styles.inputBox}>
