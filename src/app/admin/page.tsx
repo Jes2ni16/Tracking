@@ -336,8 +336,8 @@ return formattedDate;
             <td>{data.filename}</td>
             <td>{getUserNameById(data.createdBy)}</td>
             <td>
-            {data.status === 'relasing' && data.releaseDate
-                ? `relasing  ${formatDate(data.releaseDate)}`
+            {data.status === 'releasing' && data.releaseDate
+                ? `releasing  ${formatDate(data.releaseDate)}`
                 : data.status}
         </td>
             <td>
