@@ -335,10 +335,8 @@ return formattedDate;
             <td>{formatDate(data.createdAt)}</td>
             <td>{data.filename}</td>
             <td>{getUserNameById(data.createdBy)}</td>
-            <td>
-            {data.status === 'releasing' && data.releaseDate
-                ? `releasing  ${formatDate(data.releaseDate)}`
-                : data.status}
+            <td style={{textTransform:'capitalize'}}>
+            {data.status}
         </td>
             <td>
             <button
