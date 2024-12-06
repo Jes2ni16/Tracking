@@ -197,7 +197,7 @@ const RegisterForm: React.FC = () => {
         Upload File
       </label>
       {file1 && (
-        <div style={{ marginTop: "10px", color: "#333" }}>
+        <div style={{ marginTop: "5px", marginBottom: "10px",  color: "#333" }}>
           <strong>Selected file:</strong> {file1.name}
         </div>
       )}
@@ -221,7 +221,7 @@ const RegisterForm: React.FC = () => {
         Upload File
       </label>
       {file2 && (
-        <div style={{ marginTop: "10px", color: "#333" }}>
+        <div style={{ marginTop: "5px", marginBottom: "10px",  color: "#333" }}>
           <strong>Selected file:</strong> {file2.name}
         </div>
       )}
@@ -243,7 +243,7 @@ const RegisterForm: React.FC = () => {
         }}
       >Upload File</label>
         {file3 && (
-        <div style={{ marginTop: "10px", color: "#333" }}>
+        <div style={{ marginTop: "5px", marginBottom: "10px",  color: "#333" }}>
           <strong>Selected file:</strong> {file3.name}
         </div>
       )}
