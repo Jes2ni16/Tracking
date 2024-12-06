@@ -69,7 +69,7 @@ const RegisterForm: React.FC = () => {
   Status: {document?.status}
 </h3>
 {document?.status === 'releasing' && (
-  <p>on {document.releaseDate} 08:00 AM - 04:00 PM</p>
+  <p style={{display:'block'}}>on {new Date(document.releaseDate).toLocaleDateString()} 08:00 AM - 04:00 PM</p>
 )}
           </div>
         )
