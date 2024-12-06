@@ -12,7 +12,7 @@ interface Document {
     filename: string;
     status: string;
     createdBy: string;
-    releaseDate?: string; 
+     releaseDate?: string; 
 }
 
 interface User {
@@ -127,10 +127,8 @@ console.log(documents)
               return 'Process';
           case 'process':
               return 'Release';
-          case 'to be released':
-              return 'Mark as Released';
-          case 'released':
-              return 'Archived';
+          case 'releasing':
+              return 'Archive';
           default:
               return '';
       }
@@ -192,11 +190,11 @@ return formattedDate;
               newStatus = 'process';
               break;
           case 'process':
-              newStatus = 'to be released';
+              newStatus = 'releasing';
               releaseDate = new Date().toISOString(); // Add current date
               break;
-          case 'to be released':
-              newStatus = 'released';
+          case 'releasing':
+              newStatus = 'archived';
               break;
           default:
               setLoading(false);
@@ -338,8 +336,8 @@ return formattedDate;
             <td>{data.filename}</td>
             <td>{getUserNameById(data.createdBy)}</td>
             <td>
-            {data.status === 'to be released' && data.releaseDate
-                ? `To be released on ${formatDate(data.releaseDate)}`
+            {data.status === 'relasing' && data.releaseDate
+                ? `relasing  ${formatDate(data.releaseDate)}`
                 : data.status}
         </td>
             <td>
