@@ -123,7 +123,7 @@ const RegisterForm: React.FC = () => {
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
           required
-          pattern=".{5}"
+          pattern=".{14}"
         />
       </div>
 
