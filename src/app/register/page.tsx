@@ -116,10 +116,11 @@ const RegisterForm: React.FC = () => {
     <form onSubmit={handleSubmit}>
       <div className={styles.userDetails}>
          <div className={styles.inputBox} >
-        <label  className={styles.label}>ID Number <span>(Must consist 14 characters)</span></label>
+        <label  className={styles.label}>ID Number </label>
         <input
           id="studentId"
           type="text"
+          placeholder='Must consist 14 characters'
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
           required
